@@ -1,0 +1,27 @@
+<h3 class="page-heading">MongoDB Atlas Authentication</h3>
+
+<div class="gf-form-group">
+  <div class="gf-form-inline">
+	<div class="gf-form">
+	  <span class="gf-form-label width-9">Atlas User E-Mail</span>
+	  <input class="gf-form-input width-30" type="text" ng-model='ctrl.current.jsonData.atlasUsername' placeholder="foo@bar.com"></input>
+      <info-popover mode="right-absolute">
+          <p>The authentication to the MongoDB Atlas requires the email of an Atlas user including an API token of this user. </p><a target="_blank" href="https://docs.atlas.mongodb.com/api/#api-authentication">**Click here to see more information about the API authentication.**</a>
+      </info-popover>
+    </div>
+  </div>
+  <div class="gf-form-inline" ng-if="!ctrl.current.secureJsonFields.atlasApiToken">
+    <div class="gf-form">
+      <span class="gf-form-label width-9">Atlas User API Token</span>
+      <input class="gf-form-input width-30" type="text" ng-model='ctrl.current.secureJsonData.atlasApiToken' placeholder=""></input>
+      <info-popover mode="right-absolute">
+        <p>The authentication to the MongoDB Atlas requires the email of an Atlas user including an API token of this user. </p><a target="_blank" href="https://docs.atlas.mongodb.com/api/#api-authentication">**Click here to see more information about the API authentication.**</a>
+    </info-popover>
+    </div>
+  </div>
+  <div class="gf-form" ng-if="ctrl.current.secureJsonFields.atlasApiToken">
+    <span class="gf-form-label width-9">Atlas User API Token</span>
+    <input type="text" class="gf-form-input max-width-12" disabled="disabled" value="configured">
+    <a class="btn btn-secondary gf-form-btn" href="#" ng-click="ctrl.current.secureJsonFields.atlasApiToken = false">reset</a>
+  </div>
+</div>

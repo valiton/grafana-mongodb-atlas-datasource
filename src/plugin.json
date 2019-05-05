@@ -1,0 +1,40 @@
+{
+  "id": "grafana-mongodb-atlas-datasource",
+  "name": "MongoDB Atlas Logs",
+  "type": "datasource",
+
+  "metrics": true,
+  "annotations": true,
+  "backend": true,
+  "alerting": true,
+  "executable": "mongodb-atlas-datasource",
+
+  "info": {
+    "description": "simple json datasource",
+    "author": {
+      "name": "Christoph Caprano (Valiton GmbH)",
+      "url": "https://www.valiton.com"
+    },
+    "logos": {
+      "small": "img/mongodb_logo.svg",
+      "large": "img/mongodb_logo.svg"
+    },
+    "links": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/valiton/grafana-mongodb-atlas-datasource"
+      },
+      {
+        "name": "MIT License",
+        "url": "https://github.com/valiton/grafana-mongodb-atlas-datasource/blob/master/LICENSE"
+      }
+    ],
+    "version": "1.0.0",
+    "updated": "2019-04-10"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "6.x.x",
+    "plugins": []
+  }
+}
