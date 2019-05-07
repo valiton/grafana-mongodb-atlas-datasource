@@ -1,7 +1,0 @@
-version: '3'
-
-services:
-  fake-simple-json-datasource:
-    build: ./fake-simple-json
-    ports:
-      - "3333:3333"
