@@ -75,11 +75,10 @@ We use semversion format for tagging the releases.
 
 ```bash
 make
-zip -r grafana-mongodb-atlas-datasource-vx_y_z.zip ./* -x node_modules -x vendor -x screenshots
-zip -r grafana-mongodb-atlas-datasource-latest.zip ./* -x node_modules -x vendor -x screenshots
+zip --exclude "*node_modules*" --exclude "*vendor*" --exclude "*\.git*" -r grafana-mongodb-atlas-datasource.zip ./
 ```
 
-## 5) Create Release with zip files as Release in Github
+## 5) Create Release with zip files as attachment
 
 see https://help.github.com/en/articles/creating-releases for more information
 
