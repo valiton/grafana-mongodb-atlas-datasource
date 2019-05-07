@@ -29,7 +29,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new CopyWebpackPlugin([
-      { from: '../LICENSE' },
+      { from: '../LICENSE.txt' },
       { from: '../README.md' },
       { from: 'plugin.json' },
       { from: 'img/*' },
