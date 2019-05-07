@@ -10,14 +10,14 @@ This plugin allows to fetch [process](https://docs.atlas.mongodb.com/reference/a
 
 You can load the latest plugin version with the following command: 
 ```bash
-grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest.zip plugins install grafana-mongodb-atlas-datasource
+grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip plugins install grafana-mongodb-atlas-datasource
 ```
 
 > Please note that we currently only build for linux. If you have a windows machine, then you have to update the Makefile accordingly
 
 For docker setup add the following environment variable to automatically install the plugin: 
 ```
-docker run -p 3000:3000 -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest.zip;grafana-mongodb-atlas-plugin" grafana/grafana
+docker run -p 3000:3000 -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip;grafana-mongodb-atlas-plugin" grafana/grafana
 ```
 
 For more information about the plugin installation have a look at the [plugin official documentation](https://grafana.com/docs/plugins/installation/).
