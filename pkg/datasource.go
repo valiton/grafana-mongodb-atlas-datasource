@@ -227,7 +227,7 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 		disk := queryParameters.Get("disk").MustString()
 		clusterID := queryParameters.Get("clusterId").MustString()
 		dimensionID := queryParameters.Get("dimensionId").MustString()
-		intervalSec := queryParameters.Get("intervalSec").MustInt()
+		intervalMs := queryParameters.Get("intervalMs").MustInt()
 
 		if metric == "database_measurements" {
 			fromRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.FromRaw, 10, 64)
@@ -235,7 +235,7 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 			rawDataPoints, err := GetDatabaseMeasurements(ctx, credentials, projectID, mongo, database, &MeasurementOptions{
 				Start:       time.Unix(fromRaw/1000, 0).Format(time.RFC3339),
 				End:         time.Unix(toRaw/1000, 0).Format(time.RFC3339),
-				IntervalSec: intervalSec,
+				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
 			if err != nil {
@@ -280,7 +280,7 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 			rawDataPoints, err := GetProcessMeasurements(ctx, credentials, projectID, mongo, &MeasurementOptions{
 				Start:       time.Unix(fromRaw/1000, 0).Format(time.RFC3339),
 				End:         time.Unix(toRaw/1000, 0).Format(time.RFC3339),
-				IntervalSec: intervalSec,
+				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
 			if err != nil {
@@ -325,7 +325,7 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 			rawDataPoints, err := GetDiskMeasurements(ctx, credentials, projectID, mongo, disk, &MeasurementOptions{
 				Start:       time.Unix(fromRaw/1000, 0).Format(time.RFC3339),
 				End:         time.Unix(toRaw/1000, 0).Format(time.RFC3339),
-				IntervalSec: intervalSec,
+				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
 			if err != nil {

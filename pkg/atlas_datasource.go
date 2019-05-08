@@ -210,7 +210,7 @@ func GetMongoDatabases(ctx context.Context, credentials *AtlasCredentials, group
 type MeasurementOptions struct {
 	Start       string
 	End         string
-	IntervalSec int
+	IntervalMs  int
 	Measurement string
 }
 
@@ -253,40 +253,48 @@ func GetMeasurements(body []byte, ctx context.Context) ([]*DataPoint, error) {
 	}
 
 	jMeasurements := jBody.Get("measurements")
-	pluginLogger.Debug("GetDatabaseMeasurements", "measurements", jMeasurements)
+	pluginLogger.Debug("GetMeasurements", "measurements", jMeasurements)
 	if len(jMeasurements.MustArray()) == 0 {
 		return make([]*DataPoint, 0), nil
 	}
 	firstMeasurement := jMeasurements.GetIndex(0)
-	pluginLogger.Debug("GetDatabaseMeasurements", "first measurement", firstMeasurement)
+	pluginLogger.Debug("GetMeasurements", "first measurement", firstMeasurement)
 	var rawDataPoints = firstMeasurement.Get("dataPoints")
-	pluginLogger.Debug("GetDatabaseMeasurements", "raw data points", rawDataPoints)
+	pluginLogger.Debug("GetMeasurements", "raw data points", rawDataPoints)
 	var numDataPoints = len(rawDataPoints.MustArray())
-	var dataPoints = make([]*DataPoint, numDataPoints)
+	var dataPoints = make([]*DataPoint, 0, numDataPoints)
 	for i := 0; i < numDataPoints; i++ {
 		var jDataPoint = rawDataPoints.GetIndex(i)
 
-		pluginLogger.Debug("GetDatabaseMeasurements", "data point", jDataPoint)
+		dataPointValue := jDataPoint.Get("value")
+
+		// filter out all JSON null values that are sent by Atlas
+		if dataPointValue.Interface() == nil {
+			continue
+		}
+
+		pluginLogger.Debug("GetMeasurements", "data point", jDataPoint)
 
 		dataPoint := &DataPoint{
 			Timestamp: jDataPoint.Get("timestamp").MustString(),
-			Value:     jDataPoint.Get("value").MustFloat64(),
+			Value:     dataPointValue.MustFloat64(),
 		}
-		dataPoints[i] = dataPoint
+		dataPoints = append(dataPoints, dataPoint)
 	}
 
-	pluginLogger.Debug("GetDatabaseMeasurements", "Final data points", dataPoints)
+	pluginLogger.Debug("GetMeasurements", "Final data points", dataPoints)
 
 	return dataPoints, nil
 }
 
 func GetMeasurementOptions(options *MeasurementOptions) map[string]string {
 	var granularity string
-	if options.IntervalSec <= 60 {
+
+	if options.IntervalMs <= 60000 {
 		granularity = "PT1M"
-	} else if options.IntervalSec <= 500 {
+	} else if options.IntervalMs <= 500000 {
 		granularity = "PT5M"
-	} else if options.IntervalSec <= 3600 {
+	} else if options.IntervalMs <= 3600000 {
 		granularity = "PT1H"
 	} else {
 		granularity = "PT1D"

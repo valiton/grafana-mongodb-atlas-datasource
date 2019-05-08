@@ -122,6 +122,7 @@ export class GenericDatasource {
   }
 
   buildQueryParameters(options: any): TSDBRequestOptions {
+    console.log(options)
     //remove placeholder targets
     options.targets = _.filter(options.targets, target => {
       return target.target !== 'select metric';
@@ -145,8 +146,8 @@ export class GenericDatasource {
         database: target.database,
         mongo: target.mongo,
         disk: target.disk,
-        intervalMs: target.intervalMs,
-        maxDataPoints: target.maxDataPoints,
+        intervalMs: options.intervalMs,
+        maxDataPoints: options.maxDataPoints,
         alias: target.alias
       };
     });
