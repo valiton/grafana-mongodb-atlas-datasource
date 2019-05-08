@@ -88,5 +88,9 @@ see https://help.github.com/en/articles/creating-releases for more information
 
   Support for process, database and disk logs
 
+- **1.0.1** - Remove empty data points from atlas logs
+
+  The logs by Atlas contain a lot of datapoints with null values. They were removed with this release. 
+
 # License
 [MIT](./LICENSE.txt)
