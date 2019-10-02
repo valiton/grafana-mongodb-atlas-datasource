@@ -12,8 +12,8 @@ import (
 )
 
 type AtlasCredentials struct {
-	Email    string
-	ApiToken string
+	PublicKey  string
+	PrivateKey string
 }
 
 func MakeHttpRequest(ctx context.Context, path string, credentials *AtlasCredentials, query map[string]string) ([]byte, error) {
@@ -23,7 +23,7 @@ func MakeHttpRequest(ctx context.Context, path string, credentials *AtlasCredent
 
 	pluginLogger.Debug("MakeHttpRequest", "URL", uri)
 
-	var t = dac.NewTransport(credentials.Email, credentials.ApiToken)
+	var t = dac.NewTransport(credentials.PublicKey, credentials.PrivateKey)
 	req, err := http.NewRequest(method, uri, nil)
 
 	if query != nil {

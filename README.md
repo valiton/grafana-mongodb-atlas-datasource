@@ -92,5 +92,9 @@ see https://help.github.com/en/articles/creating-releases for more information
 
   The logs by Atlas contain a lot of datapoints with null values. They were removed with this release. 
 
+- **1.0.2** - Rename Email / API Token to Public Key / Private Key  
+    
+  API keys aren't bound to accounts anymore: MongoDB deprecated the Personal API Keys in favor of the Programmatic API Keys.
+
 # License
 [MIT](./LICENSE.txt)

@@ -43,8 +43,8 @@ func CredentialsFromReq(tsdbReq *datasource.DatasourceRequest) *AtlasCredentials
 	parameters, _ := simplejson.NewJson([]byte(tsdbReq.Datasource.JsonData))
 
 	return &AtlasCredentials{
-		Email:    parameters.Get("atlasUsername").MustString(),
-		ApiToken: tsdbReq.Datasource.DecryptedSecureJsonData["atlasApiToken"],
+		PublicKey:  parameters.Get("atlasPublicKey").MustString(),
+		PrivateKey: tsdbReq.Datasource.DecryptedSecureJsonData["atlasPrivateKey"],
 	}
 }
 
