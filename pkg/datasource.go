@@ -233,8 +233,8 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 			fromRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.FromRaw, 10, 64)
 			toRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.ToRaw, 10, 64)
 			rawDataPoints, err := GetDatabaseMeasurements(ctx, credentials, projectID, mongo, database, &MeasurementOptions{
-				Start:       time.Unix(fromRaw/1000, 0).Format(time.RFC3339),
-				End:         time.Unix(toRaw/1000, 0).Format(time.RFC3339),
+				Start:       time.Unix(fromRaw/1000, 0).UTC().Format(time.RFC3339),
+				End:         time.Unix(toRaw/1000, 0).UTC().Format(time.RFC3339),
 				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
@@ -278,8 +278,8 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 			fromRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.FromRaw, 10, 64)
 			toRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.ToRaw, 10, 64)
 			rawDataPoints, err := GetProcessMeasurements(ctx, credentials, projectID, mongo, &MeasurementOptions{
-				Start:       time.Unix(fromRaw/1000, 0).Format(time.RFC3339),
-				End:         time.Unix(toRaw/1000, 0).Format(time.RFC3339),
+				Start:       time.Unix(fromRaw/1000, 0).UTC().Format(time.RFC3339),
+				End:         time.Unix(toRaw/1000, 0).UTC().Format(time.RFC3339),
 				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
@@ -323,8 +323,8 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 			fromRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.FromRaw, 10, 64)
 			toRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.ToRaw, 10, 64)
 			rawDataPoints, err := GetDiskMeasurements(ctx, credentials, projectID, mongo, disk, &MeasurementOptions{
-				Start:       time.Unix(fromRaw/1000, 0).Format(time.RFC3339),
-				End:         time.Unix(toRaw/1000, 0).Format(time.RFC3339),
+				Start:       time.Unix(fromRaw/1000, 0).UTC().Format(time.RFC3339),
+				End:         time.Unix(toRaw/1000, 0).UTC().Format(time.RFC3339),
 				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
