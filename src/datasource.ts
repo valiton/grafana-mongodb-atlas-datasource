@@ -1,6 +1,5 @@
 import _ from "lodash";
 
-
 interface TSDBRequest {
   queries: any[];
   from?: string;
@@ -13,10 +12,10 @@ interface TSDBQuery {
   queryType?: TSDBQueryType;
   refId?: string;
   hide?: boolean;
-  type?: 'timeserie' | 'table';
+  type?: "timeserie" | "table";
 }
 
-type TSDBQueryType = 'query' | 'search' | 'test';
+type TSDBQueryType = "query" | "search" | "test";
 
 interface TSDBRequestOptions {
   range?: {
@@ -47,30 +46,48 @@ export class GenericDatasource {
     query.targets = query.targets.filter(t => !t.hide);
 
     if (query.targets.length <= 0) {
-      return Promise.resolve({data: []});
+      return Promise.resolve({ data: [] });
     }
 
     return this.doTsdbRequest(query).then(handleTsdbResponse);
   }
 
   testDatasource() {
-    return this.doTsdbRequest({targets: [{
-      target: 'test',
-      datasourceId: this.id,
-      queryType: "test"
-    }]}).then(response => {
-      if (response.status === 200) {
-        return { status: "success", message: "Data source is working", title: "Success" };
-      } else {
-        return { status: "failed", message: "Data source is not working", title: "Error" };
-      }
-    }).catch(error => {
-      return { status: "failed", message: "Data source is not working", title: "Error" };
-    });
+    return this.doTsdbRequest({
+      targets: [
+        {
+          target: "test",
+          datasourceId: this.id,
+          queryType: "test"
+        }
+      ]
+    })
+      .then(response => {
+        if (response.status === 200) {
+          return {
+            status: "success",
+            message: "Data source is working",
+            title: "Success"
+          };
+        } else {
+          return {
+            status: "failed",
+            message: "Data source is not working",
+            title: "Error"
+          };
+        }
+      })
+      .catch(error => {
+        return {
+          status: "failed",
+          message: "Data source is not working",
+          title: "Error"
+        };
+      });
   }
 
   annotationQuery(options) {
-    var query = this.templateSrv.replace(options.annotation.query, {}, 'glob');
+    var query = this.templateSrv.replace(options.annotation.query, {}, "glob");
     var annotationQuery = {
       range: options.range,
       annotation: {
@@ -83,7 +100,7 @@ export class GenericDatasource {
       rangeRaw: options.rangeRaw
     };
 
-    return Promise.resolve()
+    return Promise.resolve();
   }
 
   metricFindQuery(query, params) {
@@ -100,13 +117,13 @@ export class GenericDatasource {
       return response.data.results[query].tables[0].rows.map(row => ({
         value: row[0],
         text: row[1]
-      }))
-    })
+      }));
+    });
   }
 
   doTsdbRequest(options: TSDBRequestOptions) {
     const tsdbRequestData: TSDBRequest = {
-      queries: options.targets,
+      queries: options.targets
     };
 
     if (options.range) {
@@ -115,26 +132,30 @@ export class GenericDatasource {
     }
 
     return this.backendSrv.datasourceRequest({
-      url: '/api/tsdb/query',
-      method: 'POST',
+      url: "/api/tsdb/query",
+      method: "POST",
       data: tsdbRequestData
     });
   }
 
   buildQueryParameters(options: any): TSDBRequestOptions {
-    console.log(options)
+    console.log(options);
     //remove placeholder targets
     options.targets = _.filter(options.targets, target => {
-      return target.target !== 'select metric';
+      return target.target !== "select metric";
     });
 
     const targets = _.map(options.targets, target => {
       return {
-        queryType: 'query',
-        target: this.templateSrv.replace(target.target, options.scopedVars, 'regex'),
+        queryType: "query",
+        target: this.templateSrv.replace(
+          target.target,
+          options.scopedVars,
+          "regex"
+        ),
         refId: target.refId,
         hide: target.hide,
-        type: target.type || 'timeserie',
+        type: target.type || "timeserie",
         datasourceId: this.id,
         projectId: target.projectId,
         projectName: target.projectName,
@@ -144,7 +165,7 @@ export class GenericDatasource {
         dimensionId: target.dimensionId,
         dimensionName: target.dimensionName,
         database: target.database,
-        mongo: target.mongo,
+        mongo: target.mongoId,
         disk: target.disk,
         intervalMs: options.intervalMs,
         maxDataPoints: options.maxDataPoints,
@@ -159,13 +180,13 @@ export class GenericDatasource {
 }
 
 export function handleTsdbResponse(response) {
-  const res= [];
+  const res = [];
   _.forEach(response.data.results, r => {
     _.forEach(r.series, s => {
-      res.push({target: s.name, datapoints: s.points});
+      res.push({ target: s.name, datapoints: s.points });
     });
     _.forEach(r.tables, t => {
-      t.type = 'table';
+      t.type = "table";
       t.refId = r.refId;
       res.push(t);
     });
@@ -180,7 +201,7 @@ export function mapToTextValue(result) {
     if (d && d.text && d.value) {
       return { text: d.text, value: d.value };
     } else if (_.isObject(d)) {
-      return { text: d, value: i};
+      return { text: d, value: i };
     }
     return { text: d, value: d };
   });
