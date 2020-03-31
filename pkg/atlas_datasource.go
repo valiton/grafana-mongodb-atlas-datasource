@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strings"
 
 	simplejson "github.com/bitly/go-simplejson"
 	dac "github.com/xinsnake/go-http-digest-auth-client"
@@ -134,8 +133,13 @@ func GetClusters(ctx context.Context, credentials *AtlasCredentials, groupId str
 	return clusters, nil
 }
 
-func GetMongos(ctx context.Context, credentials *AtlasCredentials, groupId string, clusterID string) ([]string, error) {
-	body, err := MakeHttpRequest(ctx, "/groups/"+groupId+"/clusters", credentials, nil)
+type Mongo struct {
+	ID   string
+	Name string
+}
+
+func GetMongos(ctx context.Context, credentials *AtlasCredentials, groupId string, clusterID string) ([]Mongo, error) {
+	body, err := MakeHttpRequest(ctx, "/groups/"+groupId+"/processes", credentials, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -146,16 +150,15 @@ func GetMongos(ctx context.Context, credentials *AtlasCredentials, groupId strin
 	}
 
 	var unformattedClusters = jBody.Get("results")
-	var numClusters = len(unformattedClusters.MustArray())
-	var mongos []string
-	for i := 0; i < numClusters; i++ {
-		var jCluster = unformattedClusters.GetIndex(i)
-		jClusterID := jCluster.Get("id").MustString()
-		if jClusterID != clusterID {
-			continue
-		}
+	var numMongos = len(unformattedClusters.MustArray())
+	var mongos = make([]Mongo, numMongos)
+	for i := 0; i < numMongos; i++ {
+		var jMongo = unformattedClusters.GetIndex(i)
 
-		mongos = strings.Split(strings.Replace(jCluster.Get("mongoURI").MustString(), "mongodb://", "", 1), ",")
+		mongos[i] = Mongo{
+			ID:   jMongo.Get("id").MustString(),
+			Name: jMongo.Get("hostname").MustString(),
+		}
 	}
 
 	return mongos, nil

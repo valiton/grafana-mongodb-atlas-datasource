@@ -125,8 +125,8 @@ func SearchQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 		data = make([]*suggestData, len(mongos))
 		for i, mongo := range mongos {
 			data[i] = &suggestData{
-				Text:  mongo,
-				Value: mongo,
+				Text:  mongo.Name,
+				Value: mongo.ID,
 			}
 		}
 	} else if firstQuery.RefId == "disks" && secondQuery != nil {
@@ -197,7 +197,6 @@ func transformToTable(data []*suggestData, result *datasource.QueryResult) {
 
 // Query for metric values
 func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*datasource.DatasourceResponse, error) {
-	pluginLogger.Debug("MetricQuery", "Hdfd", "dfsdf")
 	credentials := CredentialsFromReq(tsdbReq)
 	jsonQueries, err := parseJSONQueries(tsdbReq)
 	if err != nil {
