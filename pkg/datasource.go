@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strconv"
 	"strings"
 	"time"
 
@@ -131,7 +130,7 @@ func SearchQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 		}
 	} else if firstQuery.RefId == "disks" && secondQuery != nil {
 		projectID := parameters.Get("projectId").MustString()
-		mongo := parameters.Get("mongo").MustString()
+		mongo := parameters.Get("mongoId").MustString()
 		disks, err := GetMongoDisks(ctx, credentials, projectID, mongo)
 		if err != nil {
 			return nil, err
@@ -145,7 +144,7 @@ func SearchQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 		}
 	} else if firstQuery.RefId == "databases" && secondQuery != nil {
 		projectID := parameters.Get("projectId").MustString()
-		mongo := parameters.Get("mongo").MustString()
+		mongo := parameters.Get("mongoId").MustString()
 		databases, err := GetMongoDatabases(ctx, credentials, projectID, mongo)
 		if err != nil {
 			return nil, err
@@ -204,8 +203,8 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 	}
 
 	payload := simplejson.New()
-	payload.SetPath([]string{"range", "to"}, tsdbReq.TimeRange.ToRaw)
-	payload.SetPath([]string{"range", "from"}, tsdbReq.TimeRange.FromRaw)
+	payload.SetPath([]string{"range", "to"}, tsdbReq.TimeRange.ToEpochMs)
+	payload.SetPath([]string{"range", "from"}, tsdbReq.TimeRange.FromEpochMs)
 	payload.Set("targets", jsonQueries)
 
 	queries := tsdbReq.GetQueries()
@@ -219,9 +218,9 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 		}
 
 		alias := queryParameters.Get("alias").MustString()
-		metric := queryParameters.Get("metric").MustString()
+		metric := queryParameters.Get("metricId").MustString()
 		projectID := queryParameters.Get("projectId").MustString()
-		mongo := queryParameters.Get("mongo").MustString()
+		mongo := queryParameters.Get("mongoId").MustString()
 		database := queryParameters.Get("database").MustString()
 		disk := queryParameters.Get("disk").MustString()
 		clusterID := queryParameters.Get("clusterId").MustString()
@@ -229,11 +228,11 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 		intervalMs := queryParameters.Get("intervalMs").MustInt()
 
 		if metric == "database_measurements" {
-			fromRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.FromRaw, 10, 64)
-			toRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.ToRaw, 10, 64)
+			fromTime := tsdbReq.TimeRange.FromEpochMs
+			toTime := tsdbReq.TimeRange.ToEpochMs
 			rawDataPoints, err := GetDatabaseMeasurements(ctx, credentials, projectID, mongo, database, &MeasurementOptions{
-				Start:       time.Unix(fromRaw/1000, 0).UTC().Format(time.RFC3339),
-				End:         time.Unix(toRaw/1000, 0).UTC().Format(time.RFC3339),
+				Start:       time.Unix(fromTime/1000, 0).UTC().Format(time.RFC3339),
+				End:         time.Unix(toTime/1000, 0).UTC().Format(time.RFC3339),
 				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
@@ -274,11 +273,11 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 				Series: series,
 			}
 		} else if metric == "process_measurements" {
-			fromRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.FromRaw, 10, 64)
-			toRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.ToRaw, 10, 64)
+			fromTime := tsdbReq.TimeRange.FromEpochMs
+			toTime := tsdbReq.TimeRange.ToEpochMs
 			rawDataPoints, err := GetProcessMeasurements(ctx, credentials, projectID, mongo, &MeasurementOptions{
-				Start:       time.Unix(fromRaw/1000, 0).UTC().Format(time.RFC3339),
-				End:         time.Unix(toRaw/1000, 0).UTC().Format(time.RFC3339),
+				Start:       time.Unix(fromTime/1000, 0).UTC().Format(time.RFC3339),
+				End:         time.Unix(toTime/1000, 0).UTC().Format(time.RFC3339),
 				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
@@ -319,11 +318,11 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 				Series: series,
 			}
 		} else if metric == "disk_measurements" {
-			fromRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.FromRaw, 10, 64)
-			toRaw, _ := strconv.ParseInt(tsdbReq.TimeRange.ToRaw, 10, 64)
+			fromTime := tsdbReq.TimeRange.FromEpochMs
+			toTime := tsdbReq.TimeRange.ToEpochMs
 			rawDataPoints, err := GetDiskMeasurements(ctx, credentials, projectID, mongo, disk, &MeasurementOptions{
-				Start:       time.Unix(fromRaw/1000, 0).UTC().Format(time.RFC3339),
-				End:         time.Unix(toRaw/1000, 0).UTC().Format(time.RFC3339),
+				Start:       time.Unix(fromTime/1000, 0).UTC().Format(time.RFC3339),
+				End:         time.Unix(toTime/1000, 0).UTC().Format(time.RFC3339),
 				IntervalMs:  intervalMs,
 				Measurement: dimensionID,
 			})
@@ -364,7 +363,7 @@ func MetricQuery(ctx context.Context, tsdbReq *datasource.DatasourceRequest) (*d
 				Series: series,
 			}
 		} else {
-			pluginLogger.Debug("MetricQuery", "metric", "unknown")
+			pluginLogger.Debug("MetricQuery", "metric unknown", metric)
 			// nothing to do
 		}
 
