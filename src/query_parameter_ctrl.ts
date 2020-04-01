@@ -169,7 +169,7 @@ export class GrafanaMongoDbQueryParameterCtrl {
         "select cluster"
       );
       $scope.mongoSegment = uiSegmentSrv.getSegmentForValue(
-        target.mongo,
+        target.mongoName,
         "select mongo"
       );
       $scope.databaseSegment = uiSegmentSrv.getSegmentForValue(
@@ -247,14 +247,14 @@ export class GrafanaMongoDbQueryParameterCtrl {
     $scope.getDatabases = () => {
       return $scope.datasource.metricFindQuery("databases", {
         projectId: $scope.target.projectId,
-        mongo: $scope.target.mongoId
+        mongoId: $scope.target.mongoId
       });
     };
     $scope.getDisks = () => {
       return $scope.datasource.metricFindQuery("disks", {
         projectId: $scope.target.projectId,
         clusterId: $scope.target.clusterId,
-        mongo: $scope.target.mongoId
+        mongoId: $scope.target.mongoId
       });
     };
     $scope.getDimensions = () => {
