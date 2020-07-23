@@ -21,6 +21,14 @@ For docker setup add the following environment variable to automatically install
 ```
 docker run -p 3000:3000 -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip;grafana-mongodb-atlas-plugin" grafana/grafana
 ```
+In case you face `error="plugin \"grafana-mongodb-atlas-datasource\" is unsigned"` like in [issue#20](https://github.com/valiton/grafana-mongodb-atlas-datasource/issues/20) please run it allowing unsigned plugins: `GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS` flag as:
+```
+docker run \
+       --rm -p 3000:3000 \
+       -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip;grafana-mongodb-atlas-plugin" \
+       -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=grafana-mongodb-atlas-datasource" \
+       grafana/grafana
+```
 
 For more information about the plugin installation have a look at the [plugin official documentation](https://grafana.com/docs/plugins/installation/).
 
