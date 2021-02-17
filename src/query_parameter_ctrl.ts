@@ -314,7 +314,7 @@ export class GrafanaMongoDbQueryParameterCtrl {
       );
       $scope.target.dimensionId =
         HUMANITZED_DIMENSIONS[$scope.target.metricId][
-        $scope.target.dimensionName
+          $scope.target.dimensionName
         ];
       $scope.onChange();
     };
@@ -347,7 +347,7 @@ export class GrafanaMongoDbQueryParameterCtrl {
     };
 
     if (!$scope.onChange) {
-      $scope.onChange = () => { };
+      $scope.onChange = () => {};
     }
     $scope.init();
   }
