@@ -26,6 +26,7 @@ export const DIMENSIONS = {
     "GLOBAL_LOCK_CURRENT_QUEUE_TOTAL",
     "GLOBAL_LOCK_CURRENT_QUEUE_READERS",
     "GLOBAL_LOCK_CURRENT_QUEUE_WRITERS",
+    "LOGICAL_SIZE",
     "MEMORY_RESIDENT",
     "MEMORY_VIRTUAL",
     "MEMORY_MAPPED",
@@ -313,7 +314,7 @@ export class GrafanaMongoDbQueryParameterCtrl {
       );
       $scope.target.dimensionId =
         HUMANITZED_DIMENSIONS[$scope.target.metricId][
-          $scope.target.dimensionName
+        $scope.target.dimensionName
         ];
       $scope.onChange();
     };
@@ -346,7 +347,7 @@ export class GrafanaMongoDbQueryParameterCtrl {
     };
 
     if (!$scope.onChange) {
-      $scope.onChange = () => {};
+      $scope.onChange = () => { };
     }
     $scope.init();
   }
