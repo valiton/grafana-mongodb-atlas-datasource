@@ -18,16 +18,8 @@ grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasou
 
 For docker setup add the following environment variable to automatically install the plugin:
 
-```
-docker run -p 3000:3000 -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip;grafana-mongodb-atlas-plugin" grafana/grafana
-```
-In case you face `error="plugin \"grafana-mongodb-atlas-datasource\" is unsigned"` like in [issue#20](https://github.com/valiton/grafana-mongodb-atlas-datasource/issues/20) please run it allowing unsigned plugins: `GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS` flag as:
-```
-docker run \
-       --rm -p 3000:3000 \
-       -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip;grafana-mongodb-atlas-plugin" \
-       -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=grafana-mongodb-atlas-datasource" \
-       grafana/grafana
+```bash
+docker run -p 3000:3000 -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip;mongodb-atlas-datasource" -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=mongodb-atlas-datasource" grafana/grafana
 ```
 
 For more information about the plugin installation have a look at the [plugin official documentation](https://grafana.com/docs/plugins/installation/).
@@ -66,7 +58,9 @@ Next, you are asked different other parameters, such as the database name and th
 
 ![Enter parameters for your MongoDB Atlas Query](./screenshots/query_setup.png)
 
-> Note: Annotations are not yet supported!
+# Limitations
+
+- Annotations are not supported yet
 
 # Contributing
 
@@ -74,22 +68,23 @@ Pull requests for new features, bug fixes, and suggestions are welcome!
 
 # Release
 
-## 1) Add Release Notes to Changelog in README.md
+**1. Add Release Notes to Changelog in README.md**
 
-## 2) Update package.json version
+**2. Update version in src/plugin.json**
 
-## 3) Create Tag with format vx.y.z
+**3. Update package.json version**
 
-We use semversion format for tagging the releases.
+**4. Create Tag with format vx.y.z**
+> We use semversion format for tagging the releases.´
 
-## 4) Create Relase Zip
+**5. Create Relase Zip**
 
 ```bash
 make
 zip --exclude "*node_modules*" --exclude "*vendor*" --exclude "*\.git*" -r grafana-mongodb-atlas-datasource.zip ./
 ```
 
-## 5) Create Release with zip files as attachment
+**6. Create Release with zip files as attachment**
 
 see https://help.github.com/en/articles/creating-releases for more information
 
@@ -108,7 +103,20 @@ see https://help.github.com/en/articles/creating-releases for more information
   API keys aren't bound to accounts anymore: MongoDB deprecated the Personal API Keys in favor of the Programmatic API Keys.
 
 - **1.0.3** - Support Other Timezones
+  
   https://github.com/valiton/grafana-mongodb-atlas-datasource/commit/8efac61b1d1eb7915373028e2f98986c2c42923a
+
+- **1.0.4** - Fix alerting errors
+  
+  https://github.com/valiton/grafana-mongodb-atlas-datasource/pull/15
+
+- **1.1.0** - Fix alerting errors
+  https://github.com/valiton/grafana-mongodb-atlas-datasource/commit/8efac61b1d1eb7915373028e2f98986c2c42923a
+
+- **1.2.0** Add Metric & Improve Documentation
+  - Add LOGICAL_SIZE Metric
+  - Add security fixes
+  - Update authentication images in README
 
 # License
 
