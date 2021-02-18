@@ -22,7 +22,7 @@ func main() {
 			MagicCookieValue: "datasource",
 		},
 		Plugins: map[string]plugin.Plugin{
-			"grafana-mongodb-atlas-datasource": &datasource.DatasourcePluginImpl{Plugin: &MongoDbAtlasDatasource{
+			"mongodb-atlas-datasource": &datasource.DatasourcePluginImpl{Plugin: &MongoDbAtlasDatasource{
 				logger: pluginLogger,
 			}},
 		},

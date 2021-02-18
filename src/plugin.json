@@ -1,5 +1,5 @@
 {
-  "id": "grafana-mongodb-atlas-datasource",
+  "id": "mongodb-atlas-datasource",
   "name": "MongoDB Atlas Logs",
   "type": "datasource",
 
@@ -10,7 +10,7 @@
   "executable": "mongodb-atlas-datasource",
 
   "info": {
-    "description": "simple json datasource",
+    "description": "display MongoDB Atlas metrics inside of Grafana",
     "author": {
       "name": "Christoph Caprano (Valiton GmbH)",
       "url": "https://www.valiton.com"

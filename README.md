@@ -6,12 +6,14 @@ This plugin allows to fetch [process](https://docs.atlas.mongodb.com/reference/a
 
 ## Installation
 
+> Important Note: `grafana-mongodb-atlas-datasource` is renamed to `mongodb-atlas-datasource`. Please update the import command correspondingly or stay with v1
+
 ### Grafana Setup
 
 You can load the latest plugin version with the following command:
 
 ```bash
-grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip plugins install grafana-mongodb-atlas-datasource
+grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/v2.0.0/download/mongodb-atlas-datasource.zip plugins install mongodb-atlas-datasource
 ```
 
 > Please note that we currently only build for linux. If you have a windows machine, then you have to update the Makefile accordingly
@@ -19,7 +21,10 @@ grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasou
 For docker setup add the following environment variable to automatically install the plugin:
 
 ```bash
-docker run -p 3000:3000 -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/latest/download/grafana-mongodb-atlas-datasource.zip;mongodb-atlas-datasource" -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=mongodb-atlas-datasource" grafana/grafana
+docker run -p 3000:3000 \
+  -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v2.0.0/mongodb-atlas-datasource.zip" \
+  -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=mongodb-atlas-datasource" \
+  grafana/grafana
 ```
 
 For more information about the plugin installation have a look at the [plugin official documentation](https://grafana.com/docs/plugins/installation/).
@@ -81,7 +86,7 @@ Pull requests for new features, bug fixes, and suggestions are welcome!
 
 ```bash
 make
-zip --exclude "*node_modules*" --exclude "*vendor*" --exclude "*\.git*" -r grafana-mongodb-atlas-datasource.zip ./
+zip -r mongodb-atlas-datasource.zip ./dist
 ```
 
 **6. Create Release with zip files as attachment**
@@ -113,7 +118,8 @@ see https://help.github.com/en/articles/creating-releases for more information
 - **1.1.0** - Fix alerting errors
   https://github.com/valiton/grafana-mongodb-atlas-datasource/commit/8efac61b1d1eb7915373028e2f98986c2c42923a
 
-- **1.2.0** Add Metric & Improve Documentation
+- **2.0.0** Add Metric & Improve Documentation
+  - Renamed plugin from `grafana-mongodb-atlas-datasource` to `mongodb-atlas-datasource`
   - Add LOGICAL_SIZE Metric
   - Add security fixes
   - Update authentication images in README

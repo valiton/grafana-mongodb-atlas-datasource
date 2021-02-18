@@ -131,7 +131,7 @@ export const HUMANITZED_DIMENSIONS = {
   )
 };
 
-export class GrafanaMongoDbQueryParameterCtrl {
+export class MongoDbQueryParameterCtrl {
   projectNameIdMapping: Map<string, string>;
   clusterNameIdMapping: Map<string, string>;
   mongoNameIdMapping: Map<string, string>;
@@ -353,11 +353,11 @@ export class GrafanaMongoDbQueryParameterCtrl {
   }
 }
 
-export function grafanaMongodbAtlasQueryParameter() {
+export function mongodbAtlasQueryParameter() {
   return {
     templateUrl:
-      "public/plugins/grafana-mongodb-atlas-datasource/partials/query.parameter.html",
-    controller: GrafanaMongoDbQueryParameterCtrl,
+      "public/plugins/mongodb-atlas-datasource/partials/query.parameter.html",
+    controller: MongoDbQueryParameterCtrl,
     restrict: "E",
     scope: {
       target: "=",
@@ -368,6 +368,6 @@ export function grafanaMongodbAtlasQueryParameter() {
 }
 
 coreModule.directive(
-  "grafanaMongodbAtlasQueryParameter",
-  grafanaMongodbAtlasQueryParameter
+  "mongodbAtlasQueryParameter",
+  mongodbAtlasQueryParameter
 );
