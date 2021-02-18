@@ -119,7 +119,7 @@ see https://help.github.com/en/articles/creating-releases for more information
   https://github.com/valiton/grafana-mongodb-atlas-datasource/commit/8efac61b1d1eb7915373028e2f98986c2c42923a
 
 - **2.0.0** Add Metric & Improve Documentation
-  - Renamed plugin from `grafana-mongodb-atlas-datasource` to `mongodb-atlas-datasource`
+  - Renamed plugin from `grafana-mongodb-atlas-datasource` to `mongodb-atlas-datasource`: Required to sign the plugin
   - Add LOGICAL_SIZE Metric
   - Add security fixes
   - Update authentication images in README
