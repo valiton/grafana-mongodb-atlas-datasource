@@ -29,12 +29,12 @@
         "url": "https://github.com/valiton/grafana-mongodb-atlas-datasource/blob/master/LICENSE"
       }
     ],
-    "version": "1.0.0",
-    "updated": "2019-04-10"
+    "version": "1.2.0",
+    "updated": "2021-02-18"
   },
 
   "dependencies": {
-    "grafanaVersion": "6.x.x",
+    "grafanaVersion": "7.x.x",
     "plugins": []
   }
 }
