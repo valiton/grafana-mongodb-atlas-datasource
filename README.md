@@ -22,7 +22,7 @@ For docker setup add the following environment variable to automatically install
 
 ```bash
 docker run -p 3000:3000 \
-  -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v2.0.0/mongodb-atlas-datasource.zip" \
+  -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v2.0.0/mongodb-atlas-datasource.zip;mongodb-atlas-datasource" \
   -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=mongodb-atlas-datasource" \
   grafana/grafana
 ```
