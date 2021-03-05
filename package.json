@@ -1,6 +1,6 @@
 {
   "name": "mongodb-atlas-datasource",
-  "version": "1.2.0",
+  "version": "2.1.0",
   "description": "Datasource for MongoDB Atlas Logs",
   "private": true,
   "main": "index.js",
