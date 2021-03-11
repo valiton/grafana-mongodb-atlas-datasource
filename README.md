@@ -13,7 +13,7 @@ This plugin allows to fetch [process](https://docs.atlas.mongodb.com/reference/a
 You can load the latest plugin version with the following command:
 
 ```bash
-grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/v2.0.0/download/mongodb-atlas-datasource.zip plugins install mongodb-atlas-datasource
+grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v2.0.0/mongodb-atlas-datasource.zip plugins install mongodb-atlas-datasource
 ```
 
 > Please note that we currently only build for linux. If you have a windows machine, then you have to update the Makefile accordingly
