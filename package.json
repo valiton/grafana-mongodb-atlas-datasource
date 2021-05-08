@@ -36,7 +36,7 @@
     "jest": "^25.2.4",
     "jsdom": "^16.2.2",
     "load-grunt-tasks": "^5.1.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "ng-annotate-webpack-plugin": "^0.3.0",
     "prunk": "^1.3.0",
     "q": "^1.5.0",
