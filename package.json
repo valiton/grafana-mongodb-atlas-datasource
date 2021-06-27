@@ -1,6 +1,6 @@
 {
   "name": "valiton-valiton-mongodbatlas-datasource",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -12,7 +12,7 @@
     "start": "yarn watch"
   },
   "author": "Christoph Caprano",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "devDependencies": {
     "@grafana/data": "latest",
     "@grafana/runtime": "latest",
