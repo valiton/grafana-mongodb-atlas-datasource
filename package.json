@@ -1,7 +1,7 @@
 {
   "name": "valiton-valiton-mongodbatlas-datasource",
   "version": "3.0.0",
-  "description": "",
+  "description": "Display MongoDB Atlas metrics inside of Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
