@@ -2,17 +2,15 @@ package datasource
 
 import (
 	"context"
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 
 	simplejson "github.com/bitly/go-simplejson"
 )
 
 type DiskName string
 
-// Projects is a list of GitHub labels
 type Disks []DiskName
 
-// GetProjects gets all labels from a GitHub repository
 func GetDisks(ctx context.Context, client *MongoDBAtlasClient, opts models.ListDisksOptions) (Disks, error) {
 	body, err := client.query(ctx, "/groups/"+opts.Project+"/processes/"+opts.Mongo+"/disks", nil)
 	if err != nil {

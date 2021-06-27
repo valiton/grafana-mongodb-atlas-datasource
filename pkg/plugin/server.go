@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/pkg/errors"

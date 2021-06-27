@@ -1,4 +1,4 @@
-module github.com/valiton/mongodbatlas-datasource
+module github.com/valiton/grafana-mongodb-atlas-datasource
 
 go 1.16
 

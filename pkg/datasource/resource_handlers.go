@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/valiton/mongodbatlas-datasource/pkg/httputil"
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/httputil"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 )
 
 func handleGetProjects(ctx context.Context, client *MongoDBAtlasClient, r *http.Request) (Projects, error) {
@@ -19,7 +19,6 @@ func handleGetProjects(ctx context.Context, client *MongoDBAtlasClient, r *http.
 	return labels, nil
 }
 
-// HandleGetLabels is the HTTP handler for the resource call for getting GitHub labels
 func (d *Datasource) HandleGetProjects(w http.ResponseWriter, r *http.Request) {
 	projects, err := handleGetProjects(r.Context(), d.client, r)
 	if err != nil {
@@ -44,7 +43,6 @@ func handleGetClusters(ctx context.Context, client *MongoDBAtlasClient, r *http.
 	return labels, nil
 }
 
-// HandleGetLabels is the HTTP handler for the resource call for getting GitHub labels
 func (d *Datasource) HandleGetClusters(w http.ResponseWriter, r *http.Request) {
 	clusters, err := handleGetClusters(r.Context(), d.client, r)
 	if err != nil {
@@ -69,7 +67,6 @@ func handleGetMongos(ctx context.Context, client *MongoDBAtlasClient, r *http.Re
 	return mongos, nil
 }
 
-// HandleGetLabels is the HTTP handler for the resource call for getting GitHub labels
 func (d *Datasource) HandleGetMongos(w http.ResponseWriter, r *http.Request) {
 	mongos, err := handleGetMongos(r.Context(), d.client, r)
 	if err != nil {
@@ -95,7 +92,6 @@ func handleGetDisks(ctx context.Context, client *MongoDBAtlasClient, r *http.Req
 	return disks, nil
 }
 
-// HandleGetLabels is the HTTP handler for the resource call for getting GitHub labels
 func (d *Datasource) HandleGetDisks(w http.ResponseWriter, r *http.Request) {
 	disks, err := handleGetDisks(r.Context(), d.client, r)
 	if err != nil {
@@ -121,7 +117,6 @@ func handleGetDatabases(ctx context.Context, client *MongoDBAtlasClient, r *http
 	return databases, nil
 }
 
-// HandleGetMilestones is the HTTP handler for the resource call for getting GitHub milestones
 func (d *Datasource) HandleGetDatabases(w http.ResponseWriter, r *http.Request) {
 	databases, err := handleGetDatabases(r.Context(), d.client, r)
 	if err != nil {

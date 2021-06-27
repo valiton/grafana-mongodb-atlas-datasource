@@ -3,9 +3,9 @@ package plugin
 import (
 	"context"
 
-	"github.com/valiton/mongodbatlas-datasource/pkg/dfutil"
-	"github.com/valiton/mongodbatlas-datasource/pkg/datasource"
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/dfutil"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/datasource"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
 )
@@ -16,22 +16,18 @@ type Instance struct {
 	Handlers   Handlers
 }
 
-// HandleDatabaseMeasurementsQuery ...
 func (i *Instance) HandleDatabaseMeasurementsQuery(ctx context.Context, q *models.DatabaseMeasurementsQuery, req backend.DataQuery) (dfutil.Framer, error) {
 	return i.Datasource.HandleDatabaseMeasurementsQuery(ctx, q, req)
 }
 
-// HandleProcessMeasurementsQuery ...
 func (i *Instance) HandleProcessMeasurementsQuery(ctx context.Context, q *models.ProcessMeasurementsQuery, req backend.DataQuery) (dfutil.Framer, error) {
 	return i.Datasource.HandleProcessMeasurementsQuery(ctx, q, req)
 }
 
-// HandleDiskMeasurementsQuery ...
 func (i *Instance) HandleDiskMeasurementsQuery(ctx context.Context, q *models.DiskMeasurementsQuery, req backend.DataQuery) (dfutil.Framer, error) {
 	return i.Datasource.HandleDiskMeasurementsQuery(ctx, q, req)
 }
 
-// CheckHealth ...
 func (i *Instance) CheckHealth(ctx context.Context) error {
 	return i.Datasource.CheckHealth(ctx)
 }

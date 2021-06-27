@@ -7,8 +7,8 @@ import (
 
 	simplejson "github.com/bitly/go-simplejson"
 
-	"github.com/valiton/mongodbatlas-datasource/pkg/dfutil"
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/dfutil"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
@@ -16,12 +16,10 @@ import (
 
 
 
-// Datasource handles requests to GitHub
 type Datasource struct {
 	client *MongoDBAtlasClient
 }
 
-// CheckHealth calls frequently used endpoints to determine if the client has sufficient privileges
 func (d *Datasource) CheckHealth(ctx context.Context) error {
 	_, err := d.client.query(ctx, "/", nil)
 
@@ -157,7 +155,6 @@ func getName(refId, alias, projectID, projectName, clusterID, clusterName, datab
 	return name
 }
 
-// HandleRepositoriesQuery is the query handler for listing GitHub Repositories
 func (d *Datasource) HandleProcessMeasurementsQuery(ctx context.Context, query *models.ProcessMeasurementsQuery, req backend.DataQuery) (dfutil.Framer, error) {
 	project := query.Project.Value
 	mongo := query.Mongo.Value

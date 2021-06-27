@@ -2,7 +2,7 @@ package datasource
 
 import (
 	"context"
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 
 	simplejson "github.com/bitly/go-simplejson"
 )
@@ -12,10 +12,8 @@ type Mongo struct {
 	Name        string `json:"name"`
 }
 
-// Projects is a list of GitHub labels
 type Mongos []Mongo
 
-// GetProjects gets all labels from a GitHub repository
 func GetMongos(ctx context.Context, client *MongoDBAtlasClient, opts models.ListMongosOptions) (Mongos, error) {
 	body, err := client.query(ctx, "/groups/"+opts.Project+"/processes", nil)
 	if err != nil {

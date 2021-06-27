@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	dac "github.com/xinsnake/go-http-digest-auth-client"
 
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 )

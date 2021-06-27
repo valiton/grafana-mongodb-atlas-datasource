@@ -3,7 +3,7 @@ package datasource
 import (
 	"context"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 
 	simplejson "github.com/bitly/go-simplejson"
 )
@@ -13,10 +13,8 @@ type Project struct {
 	Name        string `json:"name"`
 }
 
-// Projects is a list of GitHub labels
 type Projects []Project
 
-// GetProjects gets all labels from a GitHub repository
 func GetProjects(ctx context.Context, client *MongoDBAtlasClient, opts models.ListProjectsOptions) (Projects, error) {
 	body, err := client.query(ctx, "/groups", nil)
 	if err != nil {

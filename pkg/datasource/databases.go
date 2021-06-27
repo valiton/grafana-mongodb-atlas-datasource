@@ -2,15 +2,13 @@ package datasource
 
 import (
 	"context"
-	"github.com/valiton/mongodbatlas-datasource/pkg/models"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 
 	simplejson "github.com/bitly/go-simplejson"
 )
 
-// Projects is a list of GitHub labels
 type Databases []string
 
-// GetProjects gets all labels from a GitHub repository
 func GetDatabases(ctx context.Context, client *MongoDBAtlasClient, opts models.ListDatabasesOptions) (Databases, error) {
 	body, err := client.query(ctx, "/groups/"+opts.Project+"/processes/"+opts.Mongo+"/databases", nil)
 	if err != nil {

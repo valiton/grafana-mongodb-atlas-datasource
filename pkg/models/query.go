@@ -1,11 +1,8 @@
 package models
 
 const (
-	// QueryTypeCommits is sent by the frontend when querying commits in a GitHub repository
 	QueryDiskMeasurements = "disk_measurements"
-	// QueryTypeIssues is used when querying issues in a GitHub repository
 	QueryDatabaseMeasurements = "database_measurements"
-	// QueryTypeContributors is used when querying contributors in a GitHub repository
 	QueryProcessMeasurements = "process_measurements"
 )
 
@@ -15,15 +12,12 @@ type QueryOption struct {
 }
 
 type DiskMeasurementsQuery struct {
-	// Repository is the name of the repository being queried (ex: grafana)
 	Project QueryOption `json:"project"`
 
 	Cluster QueryOption `json:"cluster"`
 
-	// Owner is the owner of the repository (ex: grafana)
 	Mongo QueryOption `json:"mongo"`
 
-	// Owner is the owner of the repository (ex: grafana)
 	Disk QueryOption `json:"disk"`
 
 	Dimension QueryOption `json:"dimension"`
@@ -34,12 +28,10 @@ type DiskMeasurementsQuery struct {
 }
 
 type ProcessMeasurementsQuery struct {
-	// Repository is the name of the repository being queried (ex: grafana)
 	Project QueryOption `json:"project"`
 
 	Cluster QueryOption `json:"cluster"`
 
-	// Owner is the owner of the repository (ex: grafana)
 	Mongo QueryOption `json:"mongo"`
 
 	Dimension QueryOption `json:"dimension"`
@@ -50,15 +42,12 @@ type ProcessMeasurementsQuery struct {
 }
 
 type DatabaseMeasurementsQuery struct {
-	// Repository is the name of the repository being queried (ex: grafana)
 	Project QueryOption `json:"project"`
 
 	Cluster QueryOption `json:"cluster"`
 
-	// Owner is the owner of the repository (ex: grafana)
 	Mongo QueryOption `json:"mongo"`
 
-	// Owner is the owner of the repository (ex: grafana)
 	Database QueryOption `json:"database"`
 
 	Dimension QueryOption `json:"dimension"`

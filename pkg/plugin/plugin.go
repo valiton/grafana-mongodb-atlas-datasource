@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	dserrors "github.com/valiton/mongodbatlas-datasource/pkg/errors"
+	dserrors "github.com/valiton/grafana-mongodb-atlas-datasource/pkg/errors"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
