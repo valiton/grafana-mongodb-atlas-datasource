@@ -1,0 +1,55 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "datasource",
+  "name": "MongoDB Atlas Metrics",
+  "id": "valiton-mongodbatlas-datasource",
+  "metrics": true,
+  "backend": true,
+  "executable": "gpx_mongodbatlas-datasource",
+  "info": {
+    "description": "Display MongoDB Atlas metrics inside of Grafana",
+    "author": {
+      "name": "Christoph Caprano",
+      "url": "https://valiton.com"
+    },
+    "keywords": ["mongodb", "atlas", "metrics"],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/valiton/grafana-mongodb-atlas-datasource"
+      },
+      {
+        "name": "MIT License",
+        "url": "https://github.com/valiton/grafana-mongodb-atlas-datasource/blob/master/LICENSE.txt"
+      },
+      {
+        "name": "Metrics Docs",
+        "url": "https://docs.atlas.mongodb.com/api/"
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "Setup",
+        "path": "./img/screenshots/datasource_setup.png"
+      },
+      {
+        "name": "Query Example",
+        "path": "./img/screenshots/query_example.png"
+      },
+      {
+        "name": "Query Options",
+        "path": "./img/screenshots/query_setup.png"
+      }
+    ],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "plugins": []
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "valiton-valiton-mongodbatlas-datasource",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "lint": "grafana-toolkit plugin:lint",
+    "watch": "grafana-toolkit plugin:dev --watch",
+    "sign": "grafana-toolkit plugin:sign",
+    "start": "yarn watch"
+  },
+  "author": "Christoph Caprano",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "latest",
+    "@grafana/runtime": "latest",
+    "@grafana/toolkit": "latest",
+    "@grafana/ui": "latest",
+    "@types/lodash": "latest"
+  },
+  "resolutions": {
+    "rxjs": "6.6.3"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "humanize-string": "^2.1.0"
+  }
+}
