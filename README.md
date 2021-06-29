@@ -112,23 +112,23 @@ Pull requests for new features, bug fixes, and suggestions are welcome!
 
 # Release
 
-**1. Add Release Notes to Changelog in README.md**
+**1. Add Release Notes to Changelog in CHANGELOG.md**
 
-**2. Update version in src/plugin.json**
+**2. Update package.json version**
 
-**3. Update package.json version**
-
-**4. Create Tag with format vx.y.z**
+**3. Create Tag with format vx.y.z**
 > We use semversion format for tagging the releases.´
 
-**5. Create Relase Zip**
+**4. Create Release Zip**
 
 ```bash
-make
+yarn install
+npm run build
+mage -v
 zip -r valiton-mongodb-atlas-datasource.zip ./dist
 ```
 
-**6. Create Release with zip files as attachment**
+**5. Create Release with zip files as attachment**
 
 see https://help.github.com/en/articles/creating-releases for more information
 
