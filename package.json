@@ -9,6 +9,7 @@
     "lint": "grafana-toolkit plugin:lint",
     "watch": "grafana-toolkit plugin:dev --watch",
     "sign": "grafana-toolkit plugin:sign",
+    "lint": "prettier -c .",
     "start": "yarn watch"
   },
   "author": "Christoph Caprano",

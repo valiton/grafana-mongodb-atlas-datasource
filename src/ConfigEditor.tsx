@@ -62,17 +62,28 @@ export class ConfigEditor extends PureComponent<Props, State> {
     return (
       <>
         <div className="gf-form-group">
-            <Label description={<span>Please enter your MongoDB programmatic API key as described <a href="https://docs.atlas.mongodb.com/configure-api-access" target="_blank">here</a></span>}>API Access Credentials</Label>
-            <div className="gf-form">
+          <Label
+            description={
+              <span>
+                Please enter your MongoDB programmatic API key as described
+                <a href="https://docs.atlas.mongodb.com/configure-api-access" target="_blank">
+                  here
+                </a>
+              </span>
+            }
+          >
+            API Access Credentials
+          </Label>
+          <div className="gf-form">
             <FormField
               label="Public Key"
               onChange={this.onPublicKeyChange}
               value={jsonData.publicKey || ''}
               placeholder="e.g. wgfyfpdb"
             />
-            </div>
+          </div>
 
-            <div className="gf-form">
+          <div className="gf-form">
             <SecretFormField
               isConfigured={(secureJsonFields && secureJsonFields.privateKey) as boolean}
               value={secureJsonData.privateKey || ''}
@@ -81,7 +92,8 @@ export class ConfigEditor extends PureComponent<Props, State> {
               inputWidth={20}
               onReset={this.onResetPrivateKey}
               onChange={this.onPrivateKeyChange}
-            /></div>
+            />
+          </div>
         </div>
 
         <div className="gf-form-group">
