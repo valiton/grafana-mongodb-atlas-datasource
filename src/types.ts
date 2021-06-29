@@ -180,6 +180,7 @@ export const defaultQuery: Partial<Query> = {
  */
 export interface DataSourceOptions extends DataSourceJsonData {
   publicKey?: string;
+  apiType?: string;
 }
 
 /**

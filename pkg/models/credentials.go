@@ -8,6 +8,7 @@ import (
 type Settings struct {
 	PublicKey  string `json:"publicKey"`
 	PrivateKey string `json:"privateKey"`
+	ApiType string `json:"apiType"`
 }
 
 func LoadSettings(settings backend.DataSourceInstanceSettings) (*Settings, error) {

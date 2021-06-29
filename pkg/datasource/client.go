@@ -17,8 +17,13 @@ type MongoDBAtlasClient struct {
 }
 
 func (c *MongoDBAtlasClient) query(ctx context.Context, path string, query map[string]string) ([]byte, error) {
+	apiType := c.settings.ApiType
+	if apiType != "atlas" && apiType != "public" {
+		apiType = "atlas"
+	}
+	
 	var method = "GET"
-	var baseURL = "https://cloud.mongodb.com/api/atlas/v1.0"
+	var baseURL = "https://cloud.mongodb.com/api/" + apiType + "/v1.0"
 	var uri = baseURL + path
 
 	log.DefaultLogger.Debug("MakeHttpRequest", "URL", uri)
