@@ -12,37 +12,20 @@ This plugin allows to fetch [process](https://docs.atlas.mongodb.com/reference/a
 
 You can load the latest plugin version with the following command:
 
-#### Grafana version >= 7.0.0
+```bash
+grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/v3.0.0/download/valiton-mongodb-atlas-datasource.zip plugins install valiton-mongodb-atlas-datasource
+```
+
+For docker setup add the following environment variable to automatically install the plugin:
+
+```bash
+docker run -p 3000:3000 \
+  -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v3.0.0/valiton-mongodb-atlas-datasource.zip;valiton-mongodb-atlas-datasource" \
+  -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=valiton-mongodbatlas-datasource" \
+  grafana/grafana:8.0.0
+```
 
 > **Note:** Plugin ID was changed from `mongodb-atlas-datasource` to `valiton-mongodb-atlas-datasource` from v3.0.0 on due to the new plugin naming convention!
-
-```bash
-grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/v3.0.0/download/mongodb-atlas-datasource.zip plugins install valiton-mongodb-atlas-datasource
-```
-
-For docker setup add the following environment variable to automatically install the plugin:
-
-```bash
-docker run -p 3000:3000 \
-  -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v3.0.0/mongodb-atlas-datasource.zip;valiton-mongodb-atlas-datasource" \
-  -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=valiton-mongodb-atlas-datasource" \
-  grafana/grafana
-```
-
-#### Grafana version < 7.0.0
-
-```bash
-grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/v2.1.0/download/mongodb-atlas-datasource.zip plugins install mongodb-atlas-datasource
-```
-
-For docker setup add the following environment variable to automatically install the plugin:
-
-```bash
-docker run -p 3000:3000 \
-  -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v2.1.0/mongodb-atlas-datasource.zip;mongodb-atlas-datasource" \
-  -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=mongodb-atlas-datasource" \
-  grafana/grafana
-```
 
 For more information about the plugin installation have a look at the [plugin official documentation](https://grafana.com/docs/plugins/installation/).
 
@@ -142,7 +125,7 @@ Pull requests for new features, bug fixes, and suggestions are welcome!
 
 ```bash
 make
-zip -r mongodb-atlas-datasource.zip ./dist
+zip -r valiton-mongodb-atlas-datasource.zip ./dist
 ```
 
 **6. Create Release with zip files as attachment**
