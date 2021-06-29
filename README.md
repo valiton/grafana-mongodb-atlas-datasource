@@ -13,7 +13,7 @@ This plugin allows to fetch [process](https://docs.atlas.mongodb.com/reference/a
 You can load the latest plugin version with the following command:
 
 ```bash
-grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/v3.0.0/download/valiton-mongodb-atlas-datasource.zip plugins install valiton-mongodb-atlas-datasource
+grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/v3.0.0/download/valiton-mongodb-atlas-datasource.zip plugins install valiton-mongodbatlas-datasource
 ```
 
 For docker setup add the following environment variable to automatically install the plugin:
@@ -25,7 +25,7 @@ docker run -p 3000:3000 \
   grafana/grafana:8.0.0
 ```
 
-> **Note:** Plugin ID was changed from `mongodb-atlas-datasource` to `valiton-mongodb-atlas-datasource` from v3.0.0 on due to the new plugin naming convention!
+> **Note:** Plugin ID was changed from `mongodb-atlas-datasource` to `valiton-mongodbatlas-datasource` from v3.0.0 on due to the new plugin naming convention!
 
 For more information about the plugin installation have a look at the [plugin official documentation](https://grafana.com/docs/plugins/installation/).
 
