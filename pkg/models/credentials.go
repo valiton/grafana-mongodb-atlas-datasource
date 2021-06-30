@@ -6,8 +6,8 @@ import (
 )
 
 type Settings struct {
-	PublicKey  string `json:"publicKey"`
-	PrivateKey string `json:"privateKey"`
+	PublicKey  string `json:"atlasPublicKey"`
+	PrivateKey string `json:"atlasPrivateKey"`
 	ApiType string `json:"apiType"`
 }
 
@@ -17,7 +17,7 @@ func LoadSettings(settings backend.DataSourceInstanceSettings) (*Settings, error
 		return &Settings{}, err
 	}
 
-	if val, ok := settings.DecryptedSecureJSONData["privateKey"]; ok {
+	if val, ok := settings.DecryptedSecureJSONData["atlasPrivateKey"]; ok {
 		s.PrivateKey = val
 	}
 

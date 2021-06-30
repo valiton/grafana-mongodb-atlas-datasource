@@ -179,7 +179,7 @@ export const defaultQuery: Partial<Query> = {
  * These are options configured for each DataSource instance
  */
 export interface DataSourceOptions extends DataSourceJsonData {
-  publicKey?: string;
+  atlasPublicKey?: string;
   apiType?: string;
 }
 
@@ -187,7 +187,7 @@ export interface DataSourceOptions extends DataSourceJsonData {
  * Value that is used in the backend, but never sent over HTTP to the frontend
  */
 export interface SecureJsonData {
-  privateKey?: string;
+  atlasPrivateKey?: string;
 }
 
 export interface Project {

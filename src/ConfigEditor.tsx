@@ -14,7 +14,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
-      publicKey: event.target.value,
+      atlasPublicKey: event.target.value,
     };
     onOptionsChange({ ...options, jsonData });
   };
@@ -34,7 +34,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({
       ...options,
       secureJsonData: {
-        privateKey: event.target.value,
+        atlasPrivateKey: event.target.value,
       },
     });
   };
@@ -45,11 +45,11 @@ export class ConfigEditor extends PureComponent<Props, State> {
       ...options,
       secureJsonFields: {
         ...options.secureJsonFields,
-        privateKey: false,
+        atlasPrivateKey: false,
       },
       secureJsonData: {
         ...options.secureJsonData,
-        privateKey: '',
+        atlasPrivateKey: '',
       },
     });
   };
@@ -78,15 +78,15 @@ export class ConfigEditor extends PureComponent<Props, State> {
             <FormField
               label="Public Key"
               onChange={this.onPublicKeyChange}
-              value={jsonData.publicKey || ''}
+              value={jsonData.atlasPublicKey || ''}
               placeholder="e.g. wgfyfpdb"
             />
           </div>
 
           <div className="gf-form">
             <SecretFormField
-              isConfigured={(secureJsonFields && secureJsonFields.privateKey) as boolean}
-              value={secureJsonData.privateKey || ''}
+              isConfigured={(secureJsonFields && secureJsonFields.atlasPrivateKey) as boolean}
+              value={secureJsonData.atlasPrivateKey || ''}
               label="Private Key"
               labelWidth={6}
               inputWidth={20}
