@@ -5,6 +5,7 @@
   "id": "valiton-mongodbatlas-datasource",
   "metrics": true,
   "backend": true,
+  "alerting": true,
   "executable": "gpx_mongodbatlas-datasource",
   "info": {
     "description": "Display MongoDB Atlas metrics inside of Grafana",
