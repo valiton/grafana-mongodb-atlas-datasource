@@ -4,40 +4,30 @@ MongoDB Atlas allows to fetch logs from their service. More information can be f
 
 This plugin allows to fetch [process](https://docs.atlas.mongodb.com/reference/api/process-measurements/), [database](https://docs.atlas.mongodb.com/reference/api/process-databases-measurements/) and [disk](https://docs.atlas.mongodb.com/reference/api/process-disks-measurements/) logs from MongoDB Atlas in your Grafana dashboard. This allows you to monitor your whole MongoDB Atlas infrastructure within your grafana dashboards.
 
-## Installation
+![Panel Example](./src/img/screenshots/query_example.png)
 
-> Important Note: `grafana-mongodb-atlas-datasource` is renamed to `mongodb-atlas-datasource`. Please update the import command correspondingly or stay with v1
+## Installation
 
 ### Grafana Setup
 
 You can load the latest plugin version with the following command:
 
 ```bash
-grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v2.0.0/mongodb-atlas-datasource.zip plugins install mongodb-atlas-datasource
+grafana-cli --pluginUrl https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/v3.0.0/download/valiton-mongodb-atlas-datasource.zip plugins install valiton-mongodbatlas-datasource
 ```
-
-> Please note that we currently only build for linux. If you have a windows machine, then you have to update the Makefile accordingly
 
 For docker setup add the following environment variable to automatically install the plugin:
 
 ```bash
 docker run -p 3000:3000 \
-  -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v2.0.0/mongodb-atlas-datasource.zip;mongodb-atlas-datasource" \
-  -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=mongodb-atlas-datasource" \
-  grafana/grafana
+  -e GF_INSTALL_PLUGINS="https://github.com/valiton/grafana-mongodb-atlas-datasource/releases/download/v3.0.0/valiton-mongodb-atlas-datasource.zip;valiton-mongodb-atlas-datasource" \
+  -e "GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=valiton-mongodbatlas-datasource" \
+  grafana/grafana:8.0.0
 ```
+
+> **Note:** Plugin ID was changed from `mongodb-atlas-datasource` to `valiton-mongodbatlas-datasource` from v3.0.0 on due to the new plugin naming convention!
 
 For more information about the plugin installation have a look at the [plugin official documentation](https://grafana.com/docs/plugins/installation/).
-
-### Dev setup
-
-This plugin requires node > 8.10 and [dep](https://golang.github.io/dep/docs/installation.html)
-
-```sh
-npm install # install JavaScript dependencies
-dep ensure  # install go dependencies
-make        # build JavaScript frontend and Go backend
-```
 
 # Usage
 
@@ -45,11 +35,11 @@ make        # build JavaScript frontend and Go backend
 
 After installing the datasource in Grafana (see Grafana Setup section), you can create a Grafana datasource.
 
-![Select MongoDB Atlas Logs datasource from list](./screenshots/datasource_list.png)
+![Select MongoDB Atlas Logs datasource from list](./src/img/screenshots/datasource_list.png)
 
-Please enter here your Atlas email address and the Atlas API token in the two input fields and click on enter. If the credentials are valid, you will see a green info box. For more information, have a look at the [MongoDB Atlas documentation](TBD) to create these credentials.
+Please enter here your programmatic API key credentials in the two input fields and click on enter. If the credentials are valid, you will see a green info box. For more information, have a look at the [MongoDB Atlas documentation](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) to create these credentials.
 
-![Enter your MongoDB Atlas credentials to the form](./screenshots/datasource_setup.png)
+![Enter your MongoDB Atlas credentials to the form](./src/img/screenshots/datasource_setup.png)
 
 ## Create Panel
 
@@ -61,7 +51,56 @@ After setting up the datasource, you are able to create a query for a Grafana pa
 
 Next, you are asked different other parameters, such as the database name and then you can select the dimension you want to display in the query. To name the query, please use the `alias` input. You can use `{{name}}` to use metrics or dimensions for the name (see hint field of `alias` for more information).
 
-![Enter parameters for your MongoDB Atlas Query](./screenshots/query_setup.png)
+![Enter parameters for your MongoDB Atlas Query](./src/img/screenshots/query_setup.png)
+
+# Dev setup
+
+## Frontend
+
+1. Install dependencies
+
+   ```bash
+   yarn install
+   ```
+
+2. Build plugin in development mode or run in watch mode
+
+   ```bash
+   yarn dev
+   ```
+
+   or
+
+   ```bash
+   yarn watch
+   ```
+
+3. Build plugin in production mode
+
+   ```bash
+   yarn build
+   ```
+
+## Backend
+
+1. Update [Grafana plugin SDK for Go](https://grafana.com/docs/grafana/latest/developers/plugins/backend/grafana-plugin-sdk-for-go/) dependency to the latest minor version:
+
+   ```bash
+   go get -u github.com/grafana/grafana-plugin-sdk-go
+   go mod tidy
+   ```
+
+2. Build backend plugin binaries for Linux, Windows and Darwin:
+
+   ```bash
+   mage -v
+   ```
+
+3. List all available Mage targets for additional commands:
+
+   ```bash
+   mage -l
+   ```
 
 # Limitations
 
@@ -73,57 +112,34 @@ Pull requests for new features, bug fixes, and suggestions are welcome!
 
 # Release
 
-**1. Add Release Notes to Changelog in README.md**
+**1. Add Release Notes to Changelog in CHANGELOG.md**
 
-**2. Update version in src/plugin.json**
+**2. Update package.json version**
 
-**3. Update package.json version**
-
-**4. Create Tag with format vx.y.z**
+**3. Create Tag with format vx.y.z**
 > We use semversion format for tagging the releases.´
 
-**5. Create Relase Zip**
+**4. Create Release Zip**
 
 ```bash
-make
-zip -r mongodb-atlas-datasource.zip ./dist
+yarn install
+npm run build
+mage -v
+zip -r valiton-mongodb-atlas-datasource.zip ./dist
 ```
 
-**6. Create Release with zip files as attachment**
+**5. Create Release with zip files as attachment**
 
 see https://help.github.com/en/articles/creating-releases for more information
 
 # Changelog
 
-- **1.0.0** - Initial release
-
-  Support for process, database and disk logs
-
-- **1.0.1** - Remove empty data points from atlas logs
-
-  The logs by Atlas contain a lot of datapoints with null values. They were removed with this release.
-
-- **1.0.2** - Rename Email / API Token to Public Key / Private Key
-
-  API keys aren't bound to accounts anymore: MongoDB deprecated the Personal API Keys in favor of the Programmatic API Keys.
-
-- **1.0.3** - Support Other Timezones
-  
-  https://github.com/valiton/grafana-mongodb-atlas-datasource/commit/8efac61b1d1eb7915373028e2f98986c2c42923a
-
-- **1.0.4** - Fix alerting errors
-  
-  https://github.com/valiton/grafana-mongodb-atlas-datasource/pull/15
-
-- **1.1.0** - Fix alerting errors
-  https://github.com/valiton/grafana-mongodb-atlas-datasource/commit/8efac61b1d1eb7915373028e2f98986c2c42923a
-
-- **2.0.0** Add Metric & Improve Documentation
-  - Renamed plugin from `grafana-mongodb-atlas-datasource` to `mongodb-atlas-datasource`: Required to sign the plugin
-  - Add LOGICAL_SIZE Metric [#32](https://github.com/valiton/grafana-mongodb-atlas-datasource/issues/32) 
-  - Add security fixes
-  - Update authentication images in README
+[Changelog](./CHANGELOG.md)
 
 # License
 
 [MIT](./LICENSE.txt)
+
+# Thanks to
+
+We also want to thank the Grafana team for their [Github Datasource](https://github.com/grafana/github-datasource) that helped us to get started and we also used some of their code parts. This decreased our development effort a lot, which made it easier for us to switch to the new Grafana Plugin v2 version! :-) 
