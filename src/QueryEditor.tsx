@@ -106,8 +106,7 @@ export class QueryEditor extends PureComponent<Props> {
     const metricsTypeValue = queryType;
 
     const showQueryTypes = project.value && cluster.value;
-    const showMongoField =
-      showQueryTypes && (metricsTypeValue === 'process_measurements' || metricsTypeValue === 'database_measurements');
+    const showMongoField = showQueryTypes;
     const showDatabaseField = showQueryTypes && metricsTypeValue === 'database_measurements';
     const showDiskField = showQueryTypes && metricsTypeValue === 'disk_measurements';
     const showDimensionsField = showQueryTypes;
