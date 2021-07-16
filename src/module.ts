@@ -1,18 +1,9 @@
-import './query_parameter_ctrl';
-import {GenericDatasource} from './datasource';
-import {GenericDatasourceQueryCtrl} from './query_ctrl';
+import { DataSourcePlugin } from '@grafana/data';
+import { DataSource } from './datasource';
+import { ConfigEditor } from './ConfigEditor';
+import { QueryEditor } from './QueryEditor';
+import { Query, DataSourceOptions } from './types';
 
-class GenericConfigCtrl {
-  static templateUrl = 'partials/config.html';
-}
-
-class GenericAnnotationsQueryCtrl {
-  static templateUrl = 'partials/annotations.editor.html'
-}
-
-export {
-  GenericDatasource as Datasource,
-  GenericDatasourceQueryCtrl as QueryCtrl,
-  GenericConfigCtrl as ConfigCtrl,
-  GenericAnnotationsQueryCtrl as AnnotationsQueryCtrl
-};
+export const plugin = new DataSourcePlugin<DataSource, Query, DataSourceOptions>(DataSource)
+  .setConfigEditor(ConfigEditor)
+  .setQueryEditor(QueryEditor);
