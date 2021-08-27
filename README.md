@@ -4,7 +4,7 @@ MongoDB Atlas allows to fetch logs from their service. More information can be f
 
 This plugin allows to fetch [process](https://docs.atlas.mongodb.com/reference/api/process-measurements/), [database](https://docs.atlas.mongodb.com/reference/api/process-databases-measurements/) and [disk](https://docs.atlas.mongodb.com/reference/api/process-disks-measurements/) logs from MongoDB Atlas in your Grafana dashboard. This allows you to monitor your whole MongoDB Atlas infrastructure within your grafana dashboards.
 
-![Panel Example](https://github.com/valiton/grafana-mongodb-atlas-datasource/tree/master/src/img/screenshots/query_example.png)
+![Panel Example](https://raw.githubusercontent.com/valiton/grafana-mongodb-atlas-datasource/master/src/img/screenshots/query_example.png)
 
 ## Installation
 
@@ -35,11 +35,11 @@ For more information about the plugin installation have a look at the [plugin of
 
 After installing the datasource in Grafana (see Grafana Setup section), you can create a Grafana datasource.
 
-![Select MongoDB Atlas Logs datasource from list](https://github.com/valiton/grafana-mongodb-atlas-datasource/tree/master/src/img/screenshots/datasource_list.png)
+![Select MongoDB Atlas Logs datasource from list](https://raw.githubusercontent.com/valiton/grafana-mongodb-atlas-datasource/master/src/img/screenshots/datasource_list.png)
 
 Please enter here your programmatic API key credentials in the two input fields and click on enter. If the credentials are valid, you will see a green info box. For more information, have a look at the [MongoDB Atlas documentation](https://docs.atlas.mongodb.com/configure-api-access/#programmatic-api-keys) to create these credentials.
 
-![Enter your MongoDB Atlas credentials to the form](https://github.com/valiton/grafana-mongodb-atlas-datasource/tree/master/src/img/screenshots/datasource_setup.png)
+![Enter your MongoDB Atlas credentials to the form](https://raw.githubusercontent.com/valiton/grafana-mongodb-atlas-datasource/master/src/img/screenshots/datasource_setup.png)
 
 ## Create Panel
 
@@ -51,7 +51,7 @@ After setting up the datasource, you are able to create a query for a Grafana pa
 
 Next, you are asked different other parameters, such as the database name and then you can select the dimension you want to display in the query. To name the query, please use the `alias` input. You can use `{{name}}` to use metrics or dimensions for the name (see hint field of `alias` for more information).
 
-![Enter parameters for your MongoDB Atlas Query](https://github.com/valiton/grafana-mongodb-atlas-datasource/tree/master/src/img/screenshots/query_setup.png)
+![Enter parameters for your MongoDB Atlas Query](https://raw.githubusercontent.com/valiton/grafana-mongodb-atlas-datasource/master/src/img/screenshots/query_setup.png)
 
 # Dev setup
 
@@ -143,11 +143,11 @@ see https://help.github.com/en/articles/creating-releases for more information
 
 # Changelog
 
-[Changelog](https://github.com/valiton/grafana-mongodb-atlas-datasource/tree/master/CHANGELOG.md)
+[Changelog](https://github.com/valiton/grafana-mongodb-atlas-datasource/blob/master/CHANGELOG.md)
 
 # License
 
-[MIT](https://github.com/valiton/grafana-mongodb-atlas-datasource/tree/master/LICENSE)
+[MIT](https://github.com/valiton/grafana-mongodb-atlas-datasource/blob/master/LICENSE)
 
 # Thanks to
 
