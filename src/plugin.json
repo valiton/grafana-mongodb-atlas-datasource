@@ -35,15 +35,15 @@
     "screenshots": [
       {
         "name": "Setup",
-        "path": "./img/screenshots/datasource_setup.png"
+        "path": "img/screenshots/datasource_setup.png"
       },
       {
         "name": "Query Example",
-        "path": "./img/screenshots/query_example.png"
+        "path": "img/screenshots/query_example.png"
       },
       {
         "name": "Query Options",
-        "path": "./img/screenshots/query_setup.png"
+        "path": "img/screenshots/query_setup.png"
       }
     ],
     "version": "%VERSION%",
