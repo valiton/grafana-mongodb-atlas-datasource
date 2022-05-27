@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"context"
 	"fmt"
+	"time"
 	"io/ioutil"
 	dac "github.com/xinsnake/go-http-digest-auth-client"
 
@@ -29,6 +30,12 @@ func (c *MongoDBAtlasClient) query(ctx context.Context, path string, query map[s
 	log.DefaultLogger.Debug("MakeHttpRequest", "URL", uri)
 
 	var t = dac.NewTransport(c.settings.PublicKey, c.settings.PrivateKey)
+	t.HTTPClient = &http.Client{
+		Timeout: time.Second * 10,
+		Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+		},
+	}
 	req, err := http.NewRequest(method, uri, nil)
 
 	if query != nil {
